@@ -1,13 +1,13 @@
 # TODO：Q-learning 與 SARSA 作業
 
 ## 1. 專案初始化
-- [ ] 建立專案基本結構（例如 `env/`、`algorithms/`、`train.py`、`report/`）
-- [ ] 確認可重現設定（隨機種子、超參數集中管理）
-- [ ] 定義共用參數：
-  - [ ] `epsilon = 0.1`
-  - [ ] `alpha = 0.1`
-  - [ ] `gamma = 0.9`
-  - [ ] `episodes >= 500`
+- [x] 建立專案基本結構（例如 `env/`、`algorithms/`、`train.py`、`report/`）
+- [x] 確認可重現設定（隨機種子、超參數集中管理）
+- [x] 定義共用參數：
+  - [x] `epsilon = 0.1`
+  - [x] `alpha = 0.1`
+  - [x] `gamma = 0.9`
+  - [x] `episodes >= 500`
 
 ## 2. 環境實作（Cliff Walking / Gridworld）
 - [ ] 建立網格環境（預設 4x12）
