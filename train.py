@@ -1,7 +1,9 @@
 import argparse
 import random
 
+from algorithms import QTable, TrainingHistory, choose_epsilon_greedy_action
 from config import DEFAULT_CONFIG, TrainConfig
+from env import CliffWalkingEnv
 
 try:
     import numpy as np
@@ -48,10 +50,24 @@ def main() -> None:
         raise ValueError("episodes must be >= 500 for this assignment.")
 
     set_global_seed(cfg.seed)
-    print("Phase 1 initialization complete.")
+    env = CliffWalkingEnv()
+    q_table = QTable(n_states=env.n_states, n_actions=env.n_actions)
+    history = TrainingHistory()
+
+    state = env.reset()
+    action = choose_epsilon_greedy_action(q_table.values(state), epsilon=cfg.epsilon)
+    step = env.step(action)
+    q_table.update(state=state, action=action, target=step.reward, alpha=cfg.alpha)
+    history.record_episode(total_reward=step.reward, steps=1)
+
+    print("Phase 1-3 scaffolding complete.")
     print(
         f"Config(seed={cfg.seed}, epsilon={cfg.epsilon}, alpha={cfg.alpha}, "
         f"gamma={cfg.gamma}, episodes={cfg.episodes})"
+    )
+    print(
+        f"SmokeTest(state={state}, action={action}, reward={step.reward}, "
+        f"done={step.done}, history_episodes={history.num_episodes})"
     )
 
 
