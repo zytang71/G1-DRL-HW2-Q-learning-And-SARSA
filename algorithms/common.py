@@ -71,6 +71,9 @@ class QTable:
         self.set(state, action, new_q)
         return new_q
 
+    def to_nested_list(self) -> list[list[float]]:
+        return [row[:] for row in self._table]
+
 
 @dataclass
 class TrainingHistory:

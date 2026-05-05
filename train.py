@@ -1,7 +1,9 @@
 import argparse
+import json
 import random
+from pathlib import Path
 
-from algorithms import QTable, TrainingHistory, choose_epsilon_greedy_action
+from algorithms import train_q_learning
 from config import DEFAULT_CONFIG, TrainConfig
 from env import CliffWalkingEnv
 
@@ -31,7 +33,7 @@ def load_config(episodes: int | None) -> TrainConfig:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Training entrypoint for Q-learning and SARSA (phase 1 scaffold)."
+        description="Training entrypoint for Q-learning and SARSA."
     )
     parser.add_argument(
         "--episodes",
@@ -39,7 +41,34 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Override training episodes (must be >= 500 for assignment).",
     )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="report/q_learning_results.json",
+        help="Path to save Q-learning results as JSON.",
+    )
     return parser.parse_args()
+
+
+def save_q_learning_results(
+    output_path: str, config: TrainConfig, episode_rewards: list[float], q_table: list[list[float]]
+) -> Path:
+    destination = Path(output_path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "algorithm": "q_learning",
+        "config": {
+            "seed": config.seed,
+            "epsilon": config.epsilon,
+            "alpha": config.alpha,
+            "gamma": config.gamma,
+            "episodes": config.episodes,
+        },
+        "episode_rewards": episode_rewards,
+        "q_table": q_table,
+    }
+    destination.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return destination
 
 
 def main() -> None:
@@ -51,24 +80,21 @@ def main() -> None:
 
     set_global_seed(cfg.seed)
     env = CliffWalkingEnv()
-    q_table = QTable(n_states=env.n_states, n_actions=env.n_actions)
-    history = TrainingHistory()
+    result = train_q_learning(env=env, config=cfg)
+    output_file = save_q_learning_results(
+        output_path=args.output,
+        config=cfg,
+        episode_rewards=result.history.episode_rewards,
+        q_table=result.q_table.to_nested_list(),
+    )
 
-    state = env.reset()
-    action = choose_epsilon_greedy_action(q_table.values(state), epsilon=cfg.epsilon)
-    step = env.step(action)
-    q_table.update(state=state, action=action, target=step.reward, alpha=cfg.alpha)
-    history.record_episode(total_reward=step.reward, steps=1)
-
-    print("Phase 1-3 scaffolding complete.")
+    print("Phase 4 Q-learning training complete.")
     print(
         f"Config(seed={cfg.seed}, epsilon={cfg.epsilon}, alpha={cfg.alpha}, "
         f"gamma={cfg.gamma}, episodes={cfg.episodes})"
     )
-    print(
-        f"SmokeTest(state={state}, action={action}, reward={step.reward}, "
-        f"done={step.done}, history_episodes={history.num_episodes})"
-    )
+    print(f"EpisodesTrained={result.history.num_episodes}")
+    print(f"ResultsSaved={output_file.as_posix()}")
 
 
 if __name__ == "__main__":

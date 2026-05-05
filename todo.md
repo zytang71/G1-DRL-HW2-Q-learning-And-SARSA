@@ -26,9 +26,9 @@
 - [x] 實作訓練過程中的紀錄（每回合總回饋、步數）
 
 ## 4. Q-learning 實作（Off-policy）
-- [ ] 實作 Q-learning 更新公式
-- [ ] 完成 Q-learning 訓練迴圈
-- [ ] 儲存訓練結果（reward 序列、最終 Q-table）
+- [x] 實作 Q-learning 更新公式
+- [x] 完成 Q-learning 訓練迴圈
+- [x] 儲存訓練結果（reward 序列、最終 Q-table）
 
 ## 5. SARSA 實作（On-policy）
 - [ ] 實作 SARSA 更新公式
