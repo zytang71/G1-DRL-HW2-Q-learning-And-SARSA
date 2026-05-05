@@ -31,9 +31,9 @@
 - [x] 儲存訓練結果（reward 序列、最終 Q-table）
 
 ## 5. SARSA 實作（On-policy）
-- [ ] 實作 SARSA 更新公式
-- [ ] 完成 SARSA 訓練迴圈
-- [ ] 儲存訓練結果（reward 序列、最終 Q-table）
+- [x] 實作 SARSA 更新公式
+- [x] 完成 SARSA 訓練迴圈
+- [x] 儲存訓練結果（reward 序列、最終 Q-table）
 
 ## 6. 公平比較設定
 - [ ] 使用相同環境設定比較兩者

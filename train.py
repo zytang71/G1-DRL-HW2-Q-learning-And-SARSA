@@ -3,7 +3,7 @@ import json
 import random
 from pathlib import Path
 
-from algorithms import train_q_learning
+from algorithms import train_q_learning, train_sarsa
 from config import DEFAULT_CONFIG, TrainConfig
 from env import CliffWalkingEnv
 
@@ -42,21 +42,36 @@ def parse_args() -> argparse.Namespace:
         help="Override training episodes (must be >= 500 for assignment).",
     )
     parser.add_argument(
+        "--algorithm",
+        type=str,
+        choices=["q_learning", "sarsa"],
+        default="q_learning",
+        help="Training algorithm to run.",
+    )
+    parser.add_argument(
         "--output",
         type=str,
-        default="report/q_learning_results.json",
-        help="Path to save Q-learning results as JSON.",
+        default=None,
+        help="Path to save training results as JSON.",
     )
     return parser.parse_args()
 
 
-def save_q_learning_results(
-    output_path: str, config: TrainConfig, episode_rewards: list[float], q_table: list[list[float]]
+def default_output_path(algorithm: str) -> str:
+    return f"report/{algorithm}_results.json"
+
+
+def save_training_results(
+    output_path: str,
+    algorithm: str,
+    config: TrainConfig,
+    episode_rewards: list[float],
+    q_table: list[list[float]],
 ) -> Path:
     destination = Path(output_path)
     destination.parent.mkdir(parents=True, exist_ok=True)
     payload = {
-        "algorithm": "q_learning",
+        "algorithm": algorithm,
         "config": {
             "seed": config.seed,
             "epsilon": config.epsilon,
@@ -80,15 +95,21 @@ def main() -> None:
 
     set_global_seed(cfg.seed)
     env = CliffWalkingEnv()
-    result = train_q_learning(env=env, config=cfg)
-    output_file = save_q_learning_results(
-        output_path=args.output,
+    if args.algorithm == "q_learning":
+        result = train_q_learning(env=env, config=cfg)
+    else:
+        result = train_sarsa(env=env, config=cfg)
+
+    output_path = args.output if args.output is not None else default_output_path(args.algorithm)
+    output_file = save_training_results(
+        output_path=output_path,
+        algorithm=args.algorithm,
         config=cfg,
         episode_rewards=result.history.episode_rewards,
         q_table=result.q_table.to_nested_list(),
     )
 
-    print("Phase 4 Q-learning training complete.")
+    print(f"Training complete: {args.algorithm}")
     print(
         f"Config(seed={cfg.seed}, epsilon={cfg.epsilon}, alpha={cfg.alpha}, "
         f"gamma={cfg.gamma}, episodes={cfg.episodes})"
