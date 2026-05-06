@@ -1,4 +1,4 @@
-# Phase 9 結論
+# 結論
 
 ## 1. 哪一種方法收斂較快
 在本次設定（Cliff Walking, epsilon=0.1, alpha=0.1, gamma=0.9, episodes=500）下，  

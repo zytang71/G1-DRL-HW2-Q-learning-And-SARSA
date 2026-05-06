@@ -1,4 +1,4 @@
-# Phase 8 理論比較與討論
+# 理論比較與討論
 
 ## 1. Q-learning 為 Off-policy
 Q-learning 的更新目標是：
@@ -37,7 +37,7 @@ SARSA 的更新目標是：
   - 代價是學習速度可能較慢，但通常更穩定。
 
 ## 4. 與本次實驗現象對照
-根據第七階段輸出 [phase7_metrics.json](c:\Users\User\Desktop\repository\G1-DRL-HW2-Q-learning-And-SARSA\report\phase7_metrics.json)：
+根據結果分析輸出 [comparison_metrics.json](c:\Users\User\Desktop\repository\G1-DRL-HW2-Q-learning-And-SARSA\report\comparison_metrics.json)：
 
 - 收斂速度：Q-learning 較快（145 vs 382）
 - 穩定性：SARSA 較穩（tail std 19.63 < 75.94）

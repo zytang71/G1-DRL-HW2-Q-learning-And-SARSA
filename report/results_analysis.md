@@ -1,4 +1,4 @@
-# Phase 7 Analysis
+# Results Analysis
 
 ## Learning Performance
 - Q-learning convergence episode: 145
@@ -27,4 +27,4 @@
 ## Generated Artifacts
 - `report/total_reward_curve.svg`
 - `report/final_policy_paths.svg`
-- `report/phase7_metrics.json`
+- `report/comparison_metrics.json`

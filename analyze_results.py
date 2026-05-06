@@ -327,12 +327,9 @@ def main() -> None:
             "sarsa": s_explore,
         },
     }
-    write_text(
-        report_dir / "phase7_metrics.json",
-        json.dumps(metrics_payload, indent=2),
-    )
+    write_text(report_dir / "comparison_metrics.json", json.dumps(metrics_payload, indent=2))
 
-    analysis_md = f"""# Phase 7 Analysis
+    analysis_md = f"""# Results Analysis
 
 ## Learning Performance
 - Q-learning convergence episode: {q_metrics["convergence_episode"]}
@@ -361,15 +358,15 @@ def main() -> None:
 ## Generated Artifacts
 - `report/total_reward_curve.svg`
 - `report/final_policy_paths.svg`
-- `report/phase7_metrics.json`
+- `report/comparison_metrics.json`
 """
-    write_text(report_dir / "phase7_analysis.md", analysis_md)
+    write_text(report_dir / "results_analysis.md", analysis_md)
 
-    print("Phase 7 analysis complete.")
+    print("Results analysis complete.")
     print("Generated: report/total_reward_curve.svg")
     print("Generated: report/final_policy_paths.svg")
-    print("Generated: report/phase7_metrics.json")
-    print("Generated: report/phase7_analysis.md")
+    print("Generated: report/comparison_metrics.json")
+    print("Generated: report/results_analysis.md")
 
 
 if __name__ == "__main__":
