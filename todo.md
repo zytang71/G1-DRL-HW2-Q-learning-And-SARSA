@@ -49,9 +49,9 @@
 - [x] 討論 exploration（epsilon）對學習結果影響
 
 ## 8. 理論比較撰寫
-- [ ] 說明 Q-learning 為 Off-policy（以下一狀態最佳動作更新）
-- [ ] 說明 SARSA 為 On-policy（以實際採取動作更新）
-- [ ] 討論兩者在風險、穩定性、最優性上的差異
+- [x] 說明 Q-learning 為 Off-policy（以下一狀態最佳動作更新）
+- [x] 說明 SARSA 為 On-policy（以實際採取動作更新）
+- [x] 討論兩者在風險、穩定性、最優性上的差異
 
 ## 9. 結論撰寫
 - [ ] 總結哪個方法收斂較快（依實驗結果）
