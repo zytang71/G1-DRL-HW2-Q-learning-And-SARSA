@@ -1,0 +1,17 @@
+{
+  "mode": "fair_comparison",
+  "shared_config": {
+    "seed": 42,
+    "epsilon": 0.1,
+    "alpha": 0.1,
+    "gamma": 0.9,
+    "episodes": 500,
+    "max_steps_per_episode": 1000,
+    "env_rows": 4,
+    "env_cols": 12
+  },
+  "outputs": {
+    "q_learning": "report/q_learning_results.json",
+    "sarsa": "report/sarsa_results.json"
+  }
+}
