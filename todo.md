@@ -41,12 +41,12 @@
 - [x] 使用相同訓練回合數與評估流程
 
 ## 7. 結果可視化與分析
-- [ ] 繪製兩種方法的每回合 Total Reward 曲線
-- [ ] 比較收斂速度（可含移動平均）
-- [ ] 視覺化最終策略路徑（Q-learning vs SARSA）
-- [ ] 分析策略風格（冒險 vs 保守）
-- [ ] 比較訓練波動與穩定性
-- [ ] 討論 exploration（epsilon）對學習結果影響
+- [x] 繪製兩種方法的每回合 Total Reward 曲線
+- [x] 比較收斂速度（可含移動平均）
+- [x] 視覺化最終策略路徑（Q-learning vs SARSA）
+- [x] 分析策略風格（冒險 vs 保守）
+- [x] 比較訓練波動與穩定性
+- [x] 討論 exploration（epsilon）對學習結果影響
 
 ## 8. 理論比較撰寫
 - [ ] 說明 Q-learning 為 Off-policy（以下一狀態最佳動作更新）

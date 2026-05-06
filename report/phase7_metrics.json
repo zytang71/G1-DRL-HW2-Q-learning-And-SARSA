@@ -1,0 +1,32 @@
+{
+  "q_learning": {
+    "convergence_episode": 145,
+    "tail_reward_mean": -53.04,
+    "tail_reward_std": 75.94417950047259,
+    "greedy_path_length": 13,
+    "greedy_path_loop": false,
+    "greedy_path_risk_score": 1.0
+  },
+  "sarsa": {
+    "convergence_episode": 382,
+    "tail_reward_mean": -22.75,
+    "tail_reward_std": 19.627213250994142,
+    "greedy_path_length": 17,
+    "greedy_path_loop": false,
+    "greedy_path_risk_score": 2.625
+  },
+  "exploration_eval": {
+    "q_learning": {
+      "episodes": 200,
+      "epsilon": 0.1,
+      "avg_reward_per_episode": -52.865,
+      "cliff_falls": 68
+    },
+    "sarsa": {
+      "episodes": 200,
+      "epsilon": 0.1,
+      "avg_reward_per_episode": -22.74,
+      "cliff_falls": 8
+    }
+  }
+}
